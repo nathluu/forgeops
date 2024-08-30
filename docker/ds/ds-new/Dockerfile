@@ -11,12 +11,12 @@ RUN apt-get update && apt-get install -y --no-install-recommends vim ncat dnsuti
 USER forgerock
 
 # The PVC mount point where all writeable data is stored.
-ENV DS_DATA_DIR /opt/opendj/data
+ENV DS_DATA_DIR=/opt/opendj/data
 
 # The ds deployment uses PEM based certificates. This sets the location of the certs.
 # This is set at docker *build* time. If you change this at runtime you must edit the config.ldif.
-ENV PEM_KEYS_DIRECTORY "/var/run/secrets/keys/ds"
-ENV PEM_TRUSTSTORE_DIRECTORY "/var/run/secrets/keys/truststore"
+ENV PEM_KEYS_DIRECTORY="/var/run/secrets/keys/ds"
+ENV PEM_TRUSTSTORE_DIRECTORY="/var/run/secrets/keys/truststore"
 
 # Add th default scripts to be used if the deployer does not provide an implementation.
 # See default-scripts/setup
