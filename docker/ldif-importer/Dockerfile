@@ -1,10 +1,26 @@
-FROM gcr.io/forgerock-io/ds/docker-build:7.5.0-latest-postcommit
+FROM debian:bookworm AS builder
+
+# Install dependencies
+RUN apt-get update && apt-get install -y \
+    build-essential \
+    openssl \
+    libssl-dev \
+    zlib1g-dev \
+    wget
+
+# Download and build curl
+RUN wget https://curl.se/download/curl-8.9.1.tar.gz && \
+    tar -xzf curl-8.9.1.tar.gz && \
+    cd curl-8.9.1 && \
+    ./configure --with-openssl --disable-shared && \
+    make
+
+
+FROM nathluu/ds-empty:7.5.0
 
 USER 0
 
-COPY debian-buster-sources.list /etc/apt/sources.list
-
-RUN apt-get update -y && apt-get install -y curl
+COPY --from=builder /curl-8.9.1/src/curl /usr/local/bin/curl
 
 USER 11111
 

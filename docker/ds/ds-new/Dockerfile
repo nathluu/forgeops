@@ -1,4 +1,4 @@
-FROM gcr.io/forgerock-io/ds-empty:7.5.0
+FROM nathluu/ds-empty:7.5.0
 
 # FOR DEBUG. Remove for production deployment
 USER root
