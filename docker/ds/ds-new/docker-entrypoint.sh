@@ -97,8 +97,7 @@ copyKeys() {
     [[ -d $SSL_CERT_DIR ]] && cat $SSL_CERT_DIR/tls.crt $SSL_CERT_DIR/tls.key  >$PEM_KEYS_DIRECTORY/ssl-key-pair && \
         cp $SSL_CERT_DIR/ca.crt $PEM_TRUSTSTORE_DIRECTORY/trust.pem
 
-    [[ -d $MASTER_CERT_DIR ]] && cat $MASTER_CERT_DIR/tls.key $MASTER_CERT_DIR/tls.crt $MASTER_CERT_DIR/ca.crt > $PEM_KEYS_DIRECTORY/master-key
-
+    [[ -d $MASTER_CERT_DIR ]] && cat $MASTER_CERT_DIR/master-key-pair-private.pem $MASTER_CERT_DIR/master-key-pair.pem $MASTER_CERT_DIR/ca.crt > $PEM_KEYS_DIRECTORY/master-key
     # If the user provides a truststore then use it...
     [[ -d $TRUSTSTORE_DIR ]] && cp $TRUSTSTORE_DIR/ca.crt $PEM_TRUSTSTORE_DIRECTORY/trust.pem
 }
